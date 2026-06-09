@@ -1,0 +1,5 @@
+rtoCode|rtoLocation|signalId|signalLocation|lmvCount|mcwgCount|mgvCount|hmvCount|htvCount|timestamp
+KA-04|Bangalore West|S001|TC Palya|150|50|75|25|10|2025-08-01T08:30:00Z
+KA-05|Bangalore North|S002|KR Puram|121|51|75|26|10|2025-08-01T08:30:00Z
+KA-04|Bangalore West|S003|Nagavara|101|56|75|25|10|2025-08-01T08:30:00Z
+KA-05|Bangalore North|S004|Hebbal|107|51|75|26|10|2025-08-01T08:30:00Z

@@ -1,0 +1,6 @@
+{
+  "signalId": "S001",
+  "ruleExpression": "{\"conditions\": [{\"field\": \"hourOfDay\", \"operator\": \">=\", \"value\": 8}, {\"field\": \"hourOfDay\", \"operator\": \"<=\", \"value\": 10}, {\"field\": \"lmvCount\", \"operator\": \">\", \"value\": 80}], \"logic\": \"AND\"}",
+  "enabled": true,
+  "description": "Detect congestion between 8-10AM UTC when LMV count > 80"
+}

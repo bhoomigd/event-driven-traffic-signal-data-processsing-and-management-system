@@ -1,0 +1,5 @@
+RTO Code|RTO Location|Signal Id|Signal Location|LMV Count|MCWG Count|MGV Count|HMV Count|HTV Count|Timestamp
+KA-04|Bangalore West|S001|TC Palya|100|50|75|25|10|20250719T13:40:53
+KA-05|Bangalore North|S002|KR Puram|101|51|75|26|10|20250719T13:40:53
+KA-04|Bangalore West|S003|Nagavara|100|50|75|25|10|20250719T13:40:53
+KA-05|Bangalore North|S004|Hebbal|101|51|75|26|10|20250719T13:40:53

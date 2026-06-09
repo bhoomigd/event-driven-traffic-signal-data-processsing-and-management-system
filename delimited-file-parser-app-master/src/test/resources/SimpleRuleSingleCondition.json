@@ -1,0 +1,10 @@
+{
+  "conditions": [
+    {
+      "field": "lmvCount",
+      "operator": ">",
+      "value": 120
+    }
+  ],
+  "logic": "NONE"
+}

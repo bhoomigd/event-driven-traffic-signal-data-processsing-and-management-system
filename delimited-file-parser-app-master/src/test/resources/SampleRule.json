@@ -1,0 +1,8 @@
+{
+  "conditions": [
+    {"field":"lmvCount", "operator":">", "value":120},
+    {"field":"hourOfDay", "operator":">=", "value":8},
+    {"field":"hourOfDay", "operator":"<=", "value":10}
+  ],
+  "logic": "AND"
+}
