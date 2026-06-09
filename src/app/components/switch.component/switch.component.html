@@ -1,0 +1,5 @@
+<label class="switch" for="checkbox" [class]="isChecked ? 'checked' : ''">
+    Switch
+    <input type="checkbox" id="checkbox" [checked]="isChecked" (change)="toggleSwitch()">
+    <span class="slider"></span>
+</label>

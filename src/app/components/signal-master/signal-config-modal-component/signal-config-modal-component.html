@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }}</h5>
+  <button type="button" class="btn-close" (click)="bsModalRef.hide()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="ruleForm">
+    <!-- Status -->
+    <div class="mb-3">
+      <label for="status">Status</label>
+      <select class="form-select" formControlName="status" id="status">
+        <option *ngFor="let s of statusKeys" [value]="statusOptions[s]">
+          {{ statusOptions[s] }}
+        </option>
+      </select>
+    </div>
+    <!-- RTO Code -->
+    <div class="mb-3">
+      <label for="rtoCode">RTO Code</label>
+      <input type="text" class="form-control" formControlName="rtoCode" id="rtoCode"/>
+    </div>
+    <!-- RTO Location -->
+    <div class="mb-3">
+      <label for="rtoLocation">RTO Location</label>
+      <input type="text" class="form-control" formControlName="rtoLocation" id="rtoLocation"/>
+    </div>
+    <!-- Signal ID -->
+    <div class="mb-3">
+      <label for="signalId">Signal ID</label>
+      <input type="text" class="form-control" formControlName="signalId" id="signalId"/>
+    </div>
+    <!-- Signal Location -->
+    <div class="mb-3">
+      <label for="signalLocation">Signal Location</label>
+      <input type="text" class="form-control" formControlName="signalLocation" id="signalLocation"/>
+    </div>
+    <!-- Comments -->
+    <div class="mb-3">
+      <label for="comments">Comments</label>
+      <textarea class="form-control" formControlName="comments" id="comments"></textarea>
+    </div>
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description">Description</label>
+      <textarea class="form-control" formControlName="description" id="description"></textarea>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
+  <button class="btn btn-primary" [disabled]="ruleForm.invalid" (click)="submit()">Save</button>
+</div>

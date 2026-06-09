@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Congestion Levels</h3>
+    <button class="btn btn-primary mb-3" (click)="openAddRuleModal()">
+      + Add Rule
+    </button>
+  </div>
+
+  <table class="table table-bordered table-hover table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Signal Id</th>
+        <th>Signal Name</th>
+        <th>Description</th>
+        <th>Rule Configuration</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let level of congestionLevels">
+        <td>{{ level.signalId }}</td>
+        <td>Signal {{ level.signalId }}</td>
+        <td>{{ level.description }}</td>
+
+        <!-- Accordion for Rule Config -->
+        <td>
+          <accordion>
+            <accordion-group heading="View Rule Expression">
+              <p><strong>Logic:</strong> {{ level.ruleExpression.logic }}</p>
+              <ul>
+                <li *ngFor="let condition of level.ruleExpression.conditions">
+                  {{ condition.field }} {{ condition.operator }} {{ condition.value }}
+                </li>
+              </ul>
+            </accordion-group>
+          </accordion>
+        </td>
+
+        <td>
+          <span [class.text-success]="level.enabled" [class.text-danger]="!level.enabled">
+            {{ level.enabled ? 'Enabled' : 'Disabled' }}
+          </span>
+        </td>
+
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="openEditRule(level)">Edit</button>
+          <button class="btn btn-sm btn-danger" [disabled]="!level.enabled"
+            (click)="confirmDelete(level)">Disable</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

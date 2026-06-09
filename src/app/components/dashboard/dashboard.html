@@ -1,0 +1,92 @@
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Dashboard</h3>
+        <section>
+            <label for="region" class="form-label me-2">Select Region:</label>
+            <select id="region" class="form-select d-inline-block w-auto me-3" [(ngModel)]="region">
+                <option *ngFor="let r of regions" [value]="r">{{ r }}</option>
+            </select>
+            <button class="btn btn-primary" (click)="loadTrafficData()">
+                + Load Traffic Data
+            </button>
+            <div class="alert" *ngIf="showTrafficData" [ngClass]="{ 'alert-success': !errorLoadingTrafficData, 'alert-danger': errorLoadingTrafficData }" role="alert">
+                {{ alertMessage }}
+            </div>
+        </section>
+    </div>
+
+    <tabset>
+        <tab heading="Graphical Representation" [active]="true">
+            <div style="display: flex; gap: 40px; margin-bottom: 40px; margin-top: 40px;">
+                <div style="width: 400px;">
+                    <h4>Congestion Summary</h4>
+                    <highcharts-chart *ngIf="congestionPieChartOptions" [options]="congestionPieChartOptions"
+                        style="width: 100%; height: 350px; display: block;" class="chart"></highcharts-chart>
+                </div>
+
+                <div style="flex-grow: 1;">
+                    <h4>Total Vehicle Counts by Location</h4>
+                    <highcharts-chart *ngIf="totalVehiclesChartOptions" [options]="totalVehiclesChartOptions"
+                        style="width: 100%; height: 350px; display: block;" class="chart"></highcharts-chart>
+                </div>
+            </div>
+
+            <hr>
+
+            <div style="width: 100%; margin-bottom: 40px;">
+                <h4>Detailed Vehicle Type Breakdown</h4>
+                <highcharts-chart *ngIf="vehicleTypeBreakdownChartOptions" [options]="vehicleTypeBreakdownChartOptions"
+                    style="width: 100%; height: 400px; display: block;" class="chart"></highcharts-chart>
+            </div>
+        </tab>
+        <tab heading="Tabular Data">
+            <table class="table table-bordered table-hover table-striped mt-4">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Signal Id</th>
+                        <th>Signal Name</th>
+                        <th>Counts</th>
+                        <th>Is it Congested?</th>
+                        <th>Manual Override Active</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of signalStatus">
+                        <td>{{ s.signalId }}</td>
+                        <td>{{ s.signalLocation }}</td>
+                        <td>
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <strong>LMV:</strong> {{ s.lmvCount }}
+                                </div>
+                                <div class="me-3">
+                                    <strong>HMV:</strong> {{ s.hmvCount }}
+                                </div>
+                                <div class="me-3">
+                                    <strong>HTV:</strong> {{ s.htvCount }}
+                                </div>
+                                <div class="me-3">
+                                    <strong>MCWG:</strong> {{ s.mcwgCount }}
+                                </div>
+                                <div class="me-3">
+                                    <strong>MGV:</strong> {{ s.mgvCount }}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge"
+                                [ngClass]="{'badge-success': !s.congested, 'badge-danger': s.congested}">{{
+                                s.congested ? 'Congested' : 'Not Congested' }}</span>
+                        </td>
+                        <td>{{ s.manualOverrideActive }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary me-2" (click)="editManualOverride(s)">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab>
+    </tabset>
+</div>

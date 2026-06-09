@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-3 shadow-sm">
+    <section class="container d-flex justify-content-between align-items-center flex-wrap">
+        <!-- Logo & Title -->
+        <a class="navbar-brand d-flex align-items-center" routerLink="/dashboard">
+            <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+            <span class="fw-bold fs-5">SIGNAL X</span>
+        </a>
+
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible Section -->
+        <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+            <!-- Center: Search Bar -->
+
+            <!-- Center: Links -->
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="/congestion-levels" routerLink="/congestion-levels" routerLinkActive="active">Congestion Levels</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signal-master" routerLink="/signal-master" routerLinkActive="active">Signal Management</a>
+                </li>
+            </ul>
+
+            <!-- Right: Profile Icon -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="assets/profile.png" alt="Profile" width="35" height="35" class="rounded-circle" />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" (click)="auth.logout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+</nav>

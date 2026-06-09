@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }}</h5>
+  <button type="button" class="btn-close" (click)="bsModalRef.hide()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="uploadForm">
+    <!-- Status -->
+    <div class="mb-3">
+      <label for="inputGroupFile">Select a File</label>
+      <input
+        type="file"
+        id="inputGroupFile"
+        class="form-control"
+        (change)="onFileSelected($event)"
+        accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        required
+      />
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
+  <button class="btn btn-primary" [disabled]="!selectedFile" (click)="submit()">Save</button>
+</div>

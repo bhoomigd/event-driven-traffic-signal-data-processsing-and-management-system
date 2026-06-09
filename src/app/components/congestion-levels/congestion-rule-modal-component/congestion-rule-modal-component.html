@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }}</h5>
+  <button type="button" class="btn-close" (click)="bsModalRef.hide()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="ruleForm">
+    <!-- Signal Id -->
+    <div class="mb-3">
+      <label>Signal</label>
+      <select class="form-select" formControlName="signalId">
+        <option *ngFor="let s of signals" [value]="s.signalId">
+          {{ s.signalId }} - {{ s.signalLocation }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label>Description</label>
+      <input type="text" class="form-control" formControlName="description" />
+    </div>
+
+    <!-- Conditions -->
+    <div formArrayName="conditions" *ngIf="conditions?.controls">
+      <div *ngFor="let condition of conditions.controls; let i = index" [formGroupName]="i" class="row mb-2">
+        <div class="col">
+          <select class="form-select" formControlName="field">
+            <option *ngFor="let f of fields" [value]="f">{{ f }}</option>
+          </select>
+        </div>
+        <div class="col">
+          <select class="form-select" formControlName="operator">
+            <option *ngFor="let op of operators" [value]="op">{{ op }}</option>
+          </select>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" formControlName="value" />
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-danger btn-sm" (click)="removeCondition(i)" type="button">x</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-secondary btn-sm mb-3" type="button" (click)="addCondition()">+ Add Condition</button>
+
+    <!-- Logic -->
+    <div class="mb-3">
+      <label>Logic</label>
+      <select class="form-select" formControlName="logic">
+        <option *ngFor="let logic of logicOptions" [value]="logic">{{ logic }}</option>
+      </select>
+      <div *ngIf="logicError" class="text-danger small">
+        You've to select the correct Logic
+        </div>
+    </div>
+
+    <!-- Enabled -->
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" formControlName="enabled" checked />
+        <label class="form-check-label">Enabled</label>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
+  <button class="btn btn-primary" (click)="submit()">Save</button>
+</div>

@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }} {{ signalData?.signalId }} {{ signalData?.signalLocation }}</h5>
+  <button type="button" class="btn-close" (click)="bsModalRef.hide()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="ruleForm">
+    <!-- Override Action -->
+    <div class="mb-3">
+      <label for="overrideAction">Override Action</label>
+      <select class="form-select" formControlName="overrideAction" id="overrideAction">
+        <option *ngFor="let o of overrideActionKeys" [value]="overrideActionOptions[o]">
+          {{ overrideActionOptions[o] }}
+        </option>
+      </select>
+    </div>
+    <!-- Override Duration -->
+    <div class="mb-3">
+      <label for="durationSeconds">Duration in seconds</label>
+      <input type="text" class="form-control" formControlName="durationSeconds" id="durationSeconds"/>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
+  <button class="btn btn-primary" [disabled]="ruleForm.invalid" (click)="submit()">Save</button>
+</div>

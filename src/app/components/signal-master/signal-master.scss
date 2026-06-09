@@ -1,0 +1,25 @@
+.badge {
+    &-primary {
+        color: #fff;
+        background-color: #007bff;
+    }
+
+    &-secondary {
+        color: #fff;
+        background-color: #6c757d;
+    }
+
+    &-success {
+        color: #fff;
+        background-color: #28a745;
+    }
+
+    &-danger {
+        color: #fff;
+        background-color: #dc3545;
+    }
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}

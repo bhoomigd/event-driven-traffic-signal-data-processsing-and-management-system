@@ -1,0 +1,125 @@
+<div class="container mt-4">
+  <accordion class="mb-3">
+    <accordion-group heading="Advanced Search">
+      <form [formGroup]="advancedSearchForm">
+        <section class="d-flex gap-2 flex-wrap">
+          <!-- Status -->
+          <div class="mb-3">
+            <label for="status">Status</label>
+            <select class="form-select" formControlName="status" id="status">
+              <option *ngFor="let s of statusKeys" [value]="statusOptions[s]">
+                {{ statusOptions[s] }}
+              </option>
+            </select>
+          </div>
+          <!-- Created By -->
+          <div class="mb-3">
+            <label for="createdBy">Created By</label>
+            <input type="text" class="form-control" formControlName="createdBy" id="createdBy" />
+          </div>
+          <!-- Created Time -->
+          <div class="mb-3">
+            <label for="createdTime">Created Time</label>
+            <input type="text" class="form-control" formControlName="createdTime" id="createdTime" />
+          </div>
+          <!-- Modified By -->
+          <div class="mb-3">
+            <label for="modifiedBy">Modified By</label>
+            <input type="text" class="form-control" formControlName="modifiedBy" id="modifiedBy" />
+          </div>
+          <!-- Modified Time -->
+          <div class="mb-3">
+            <label for="modifiedTime">Modified Time</label>
+            <input type="text" class="form-control" formControlName="modifiedTime" id="modifiedTime" />
+          </div>
+          <!-- Signal Metadata ID -->
+          <div class="mb-3">
+            <label for="signalMetadataId">Signal Metadata ID</label>
+            <input type="text" class="form-control" formControlName="signalMetadataId" id="signalMetadataId" />
+          </div>
+          <!-- RTO Code -->
+          <div class="mb-3">
+            <label for="rtoCode">RTO Code</label>
+            <input type="text" class="form-control" formControlName="rtoCode" id="rtoCode" />
+          </div>
+          <!-- RTO Location -->
+          <div class="mb-3">
+            <label for="rtoLocation">RTO Location</label>
+            <input type="text" class="form-control" formControlName="rtoLocation" id="rtoLocation" />
+          </div>
+          <!-- Signal ID -->
+          <div class="mb-3">
+            <label for="signalId">Signal ID</label>
+            <input type="text" class="form-control" formControlName="signalId" id="signalId" />
+          </div>
+          <!-- Signal Location -->
+          <div class="mb-3">
+            <label for="signalLocation">Signal Location</label>
+            <input type="text" class="form-control" formControlName="signalLocation" id="signalLocation" />
+          </div>
+          <!-- Comments -->
+          <div class="mb-3">
+            <label for="comments">Comments</label>
+            <textarea class="form-control" formControlName="comments" id="comments"></textarea>
+          </div>
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description">Description</label>
+            <textarea class="form-control" formControlName="description" id="description"></textarea>
+          </div>
+          <div class="align-self-end mb-3">
+            <button class="btn btn-primary me-2" (click)="applyFilters()">Apply</button>
+            <button class="btn btn-secondary" (click)="resetFilters()">Reset</button>
+          </div>
+        </section>
+      </form>
+    </accordion-group>
+  </accordion>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Signal Configuration</h3>
+    <section>
+      <button class="btn btn-primary mb-3" (click)="openAddSignalModal()">
+        + Add Signal
+      </button>
+      <button class="btn btn-primary mb-3 ml-2" (click)="bulkUploadSignals()">
+        ∆ Bulk Upload
+      </button>
+    </section>
+  </div>
+
+  <table class="table table-bordered table-hover table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>RTO Code</th>
+        <th>RTO Location</th>
+        <th>Signal Id</th>
+        <th>Signal Name</th>
+        <th>Status</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of signals">
+        <td>{{ s.rtoCode }}</td>
+        <td>{{ s.rtoLocation }}</td>
+        <td>{{ s.signalId }}</td>
+        <td>{{ s.signalLocation }}</td>
+        <td>
+          <span class="badge"
+            [ngClass]="{'badge-primary': s.status === 'ACTIVE', 'badge-secondary': s.status === 'INACTIVE' || s.status === 'DELETED'}">{{ s.status
+            }}</span>
+        </td>
+        <td>{{ s.description }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="openEditConfig(s)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="confirmDelete(s)">Disable</button>
+          <button class="btn btn-sm btn-success" *ngIf="s.status === 'DELETED'" (click)="reactivate(s)">Reactivate</button>
+          <!-- <button class="btn btn-sm btn-primary" (click)="downloadSignals(s)">
+            DS
+          </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
